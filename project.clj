@@ -16,7 +16,7 @@
                  [ring/ring-defaults "0.1.5"]
                  [prone "0.8.2"]
                  [compojure "1.4.0"]
-                 [cljs-ajax "0.2.6"]
+                 [cljs-ajax "0.3.13"]
                  [hiccup "1.0.5"]
                  [environ "1.0.0"]
                  [org.clojure/clojurescript "0.0-3308" :scope "provided"]

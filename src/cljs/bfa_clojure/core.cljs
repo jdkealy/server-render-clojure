@@ -4,51 +4,18 @@
               [secretary.core :as secretary :include-macros true]
               [goog.events :as events]
               [ajax.core :refer [POST GET]]
+              [bfa-clojure.config :as config]
+              [bfa-clojure.stores.tokens :as tokens]
+              [bfa-clojure.pages.home :as home]
+              [bfa-clojure.pages.about :as about]
               [goog.history.EventType :as EventType])
     (:import goog.History))
 
 ;; -------------------------
 ;; Views
 
-(def bfa-server
-  "http://ec2-54-157-253-221.compute-1.amazonaws.com/"
-  )
-
-(defn home-page []
-  [:div [:h2 "HELLo WORLD"]
-   [:div [:a {:href "#/about"} "go to about page"]]])
-
-(defn about-page []
-  [:div [:h2 "About bfa-clojure"]
-   [:div [:a {:href "#/"} "go to the home page"]]])
-
-(def click-count (atom 0))
-
-(defn my-account []
-  [:div
-   "The atom " [:code "click-count"] " has value: "
-   @click-count ". "
-   [:input {:type "button" :value "Click me!"
-            :on-click #(swap! click-count inc)}]])
-
-(def events-state (atom {}))
-
-(defn handler [response]
-  (.log js/console (str response)))
-
-(defn get-data []
-  (do
-    (.log js/console (str "update! " (js/Date.)))
-    (GET (str bfa-server "contents?content_area=home_top") {:response-format :json
-                                                            :handler handler
-             :keywords?       true})))
-
 (defn events []
-  (let [d (get-data)]
-    [:div [:h2 "events"]
-     (println events-state)
-     ]
-    ))
+  [:div "YO"])
 
 (defn photos []
   [:div [:h2 "photos"]
@@ -66,32 +33,36 @@
   [:div [(session/get :current-page)]])
 
 (defn layout []
-  [:div#app
-   [:div#header
-    [:a {:href "#/"} "BFA"]
-    [:a {:href "#/events"} "EVENTS"]
-    [:a {:href "#/my-account"} "MY ACCOUNT"]
-    ]
-   [:h2 "HI"]
-   [current-page]
-   ]
-  )
+  (let [d (tokens/get-token)]
+    [:div#app
+     [:div#main_container.transparent-header
+      [:header#header.fixed
+       [:nav {:className "page-container"}
+        [:a {:className "logo active" :href "#/"} ]
+        [:span#hamburger.glyphicon.glyphicon-menu-hamburger]
+        [:ul
+         [:li
+          [:a {:href "/#about"}
+           "about"]]
+         [:li
+          [:a {:href "/#book"}
+           "book now"]]]]]
+      [:article.home.page.transparent-header {:style {:margin-top "100px"}}
+       (str @tokens/token-state)
+       [current-page]]]]))
 
 ;; -------------------------
 ;; Routes
 (secretary/set-config! :prefix "#")
 
 (secretary/defroute "/" []
-  (session/put! :current-page #'home-page))
-
-(secretary/defroute "/my-account" []
-  (session/put! :current-page #'my-account))
+  (session/put! :current-page #'home/page))
 
 (secretary/defroute "/events" []
   (session/put! :current-page #'events))
 
 (secretary/defroute "/about" []
-  (session/put! :current-page #'about-page))
+  (session/put! :current-page #'about/page))
 
 ;; -------------------------
 ;; History
