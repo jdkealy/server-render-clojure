@@ -16,10 +16,10 @@
                  [ring/ring-defaults "0.1.5"]
                  [prone "0.8.2"]
                  [compojure "1.4.0"]
-                 [cljs-ajax "0.3.13"]
                  [hiccup "1.0.5"]
                  [environ "1.0.0"]
                  [org.clojure/clojurescript "0.0-3308" :scope "provided"]
+                 [mori "0.2.4"]
                  [secretary "1.2.3"]]
 
   :plugins [[lein-environ "1.0.0"]
@@ -84,7 +84,17 @@
                        :aot :all
                        :omit-source true
                        :cljsbuild {:jar true
-                                   :builds {:app
+                                   :builds {
+                                            :server {:id "server-side"
+                                                     :source-paths ["src"]
+                                                     :compiler {:output-to "resources/public/javascripts/server-side.js"
+                                                                :output-dir "resources/public/javascripts/out-server-side"
+                                                                :preamble ["resources/public/javascripts/react-with-addons.min.js"]
+                                                                :pretty-print false
+                                                                :warnings true
+                                                                :optimizations :whitespace}}
+
+                                            :app
                                              {:source-paths ["env/prod/cljs"]
                                               :compiler
                                               {:optimizations :advanced
