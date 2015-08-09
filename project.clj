@@ -89,7 +89,7 @@
                                                      :source-paths ["src"]
                                                      :compiler {:output-to "resources/public/javascripts/server-side.js"
                                                                 :output-dir "resources/public/javascripts/out-server-side"
-                                                                :preamble ["resources/public/javascripts/react-with-addons.min.js"]
+                                                                :preamble ["lib/react-with-addons.min.js"]
                                                                 :pretty-print false
                                                                 :warnings true
                                                                 :optimizations :whitespace}}
