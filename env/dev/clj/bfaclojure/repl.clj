@@ -1,5 +1,5 @@
-(ns bfa-clojure.repl
-  (:use bfa-clojure.handler
+(ns bfaclojure.repl
+  (:use bfaclojure.handler
         ring.server.standalone
         [ring.middleware file-info file]))
 

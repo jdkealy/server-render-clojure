@@ -1,5 +1,5 @@
-(ns bfa-clojure.server
-  (:require [bfa-clojure.handler :refer [app]]
+(ns bfaclojure.server
+  (:require [bfaclojure.handler :refer [app]]
             [environ.core :refer [env]]
             [ring.adapter.jetty :refer [run-jetty]])
   (:gen-class))

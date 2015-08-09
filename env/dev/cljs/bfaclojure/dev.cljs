@@ -1,5 +1,5 @@
-(ns ^:figwheel-no-load bfa-clojure.dev
-  (:require [bfa-clojure.core :as core]
+(ns ^:figwheel-no-load bfaclojure.dev
+  (:require [bfaclojure.core :as core]
             [figwheel.client :as figwheel :include-macros true]))
 
 (enable-console-print!)

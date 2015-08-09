@@ -1,0 +1,31 @@
+GIT
+  remote: git://github.com/sinatra/sinatra.git
+  revision: f9446dfc0234f2bcc9f046599ce2a977a049eaa2
+  specs:
+    sinatra (1.4.6)
+      rack (~> 1.5, >= 1.5.4, < 1.6)
+      rack-protection (~> 1.4)
+      tilt (>= 1.3, < 3)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    libv8 (3.16.14.11)
+    rack (1.5.5)
+    rack-protection (1.5.3)
+      rack
+    ref (2.0.0)
+    therubyracer (0.12.2)
+      libv8 (~> 3.16.14.0)
+      ref
+    tilt (2.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  sinatra!
+  therubyracer
+
+BUNDLED WITH
+   1.10.2

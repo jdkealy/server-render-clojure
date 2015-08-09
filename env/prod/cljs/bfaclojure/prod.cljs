@@ -1,5 +1,5 @@
-(ns bfa-clojure.prod
-  (:require [bfa-clojure.core :as core]))
+(ns bfaclojure.prod
+  (:require [bfaclojure.core :as core]))
 
 ;;ignore println statements in prod
 (set! *print-fn* (fn [& _]))

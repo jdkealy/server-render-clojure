@@ -1,4 +1,4 @@
-(defproject bfa-clojure "0.1.0-SNAPSHOT"
+(defproject bfaclojure "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
@@ -10,7 +10,7 @@
                  [ring-server "0.4.0"]
                  [cljsjs/react "0.13.3-1"]
                  [reagent "0.5.0"]
-                 [reagent-forms "0.5.4"]
+                 [reagent-forms "0.5.5"]
                  [reagent-utils "0.1.5"]
                  [ring "1.4.0"]
                  [ring/ring-defaults "0.1.5"]
@@ -19,20 +19,19 @@
                  [hiccup "1.0.5"]
                  [environ "1.0.0"]
                  [org.clojure/clojurescript "0.0-3308" :scope "provided"]
-                 [mori "0.2.4"]
                  [secretary "1.2.3"]]
 
   :plugins [[lein-environ "1.0.0"]
             [lein-asset-minifier "0.2.2"]]
 
-  :ring {:handler bfa-clojure.handler/app
-         :uberwar-name "bfa-clojure.war"}
+  :ring {:handler bfaclojure.handler/app
+         :uberwar-name "bfaclojure.war"}
 
   :min-lein-version "2.5.0"
 
-  :uberjar-name "bfa-clojure.jar"
+  :uberjar-name "bfaclojure.jar"
 
-  :main bfa-clojure.server
+  :main bfaclojure.server
 
   :clean-targets ^{:protect false} [:target-path
                                     [:cljsbuild :builds :app :compiler :output-dir]
@@ -49,10 +48,10 @@
                                         :optimizations :none
                                         :pretty-print  true}}}}
 
-  :profiles {:dev {:repl-options {:init-ns bfa-clojure.repl
+  :profiles {:dev {:repl-options {:init-ns bfaclojure.repl
                                   :nrepl-middleware []}
 
-                   :dependencies [[ring-mock "0.1.5"]
+                   :dependencies [[ring/ring-mock "0.2.0"]
                                   [ring/ring-devel "1.4.0"]
                                   [lein-figwheel "0.3.7"]
                                   [org.clojure/tools.nrepl "0.2.10"]
@@ -69,12 +68,12 @@
                               :server-port 3449
                               :nrepl-port 7002
                               :css-dirs ["resources/public/css"]
-                              :ring-handler bfa-clojure.handler/app}
+                              :ring-handler bfaclojure.handler/app}
 
                    :env {:dev true}
 
                    :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]
-                                              :compiler {:main "bfa-clojure.dev"
+                                              :compiler {:main "bfaclojure.dev"
                                                          :source-map true}}
 }
 }}
@@ -89,13 +88,12 @@
                                                      :source-paths ["src"]
                                                      :compiler {:output-to "resources/public/javascripts/server-side.js"
                                                                 :output-dir "resources/public/javascripts/out-server-side"
-                                                                :preamble ["lib/react-with-addons.min.js"]
+                                                                :preamble ["react-with-addons-0.13.3.js"]
                                                                 :pretty-print false
                                                                 :warnings true
                                                                 :optimizations :whitespace}}
-
                                             :app
-                                             {:source-paths ["env/prod/cljs"]
+                                            {:source-paths ["env/prod/cljs"]
                                               :compiler
                                               {:optimizations :advanced
                                                :pretty-print false}}}}}})

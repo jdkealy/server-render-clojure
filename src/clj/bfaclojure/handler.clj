@@ -1,4 +1,4 @@
-(ns bfa-clojure.handler
+(ns bfaclojure.handler
   (:require [compojure.core :refer [GET defroutes]]
             [compojure.route :refer [not-found resources]]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
@@ -15,16 +15,13 @@
      [:meta {:charset "utf-8"}]
      [:meta {:name "viewport"
              :content "width=device-width, initial-scale=1"}]
-     (include-css (if (env :dev) "css/site.css" "css/site.min.css"))
-
-     ]
+     (include-css (if (env :dev) "css/site.css" "css/site.min.css"))]
     [:body
      [:div#app
       [:h3 "ClojureScript has not been compiled!"]
       [:p "please run "
        [:b "lein figwheel"]
        " in order to start the compiler"]]
-     (include-js "js/underscore-min.js")
      (include-js "js/app.js")]]))
 
 (defroutes routes
@@ -35,6 +32,3 @@
 (def app
   (let [handler (wrap-defaults #'routes site-defaults)]
     (if (env :dev) (-> handler wrap-exceptions wrap-reload) handler)))
-
-
-(+ 79	149	385	364	395	379)
