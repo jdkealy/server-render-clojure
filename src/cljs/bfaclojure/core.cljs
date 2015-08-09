@@ -44,12 +44,17 @@
 ;; -------------------------
 ;; Initialize app
 (defn mount-root []
-  (reagent/render [current-page] (.getElementById js/document "app")))
+  (reagent/render [current-page]  (.getElementById js/document "app")))
 
 (defn init! []
   (hook-browser-navigation!)
   (mount-root))
 
-(defn ^:export render-me-to-s []
+(defn load-current-page [route]
+  (case route
+    "HOME" [#'home-page]
+    "ABOUT" [#'about-page]))
+
+(defn ^:export render-me-to-s [route]
   ; Render component to markup without reactid
-  (reagent.core/render-to-static-markup [:div "HELLO WORLD"]))
+  (reagent.core/render-to-string (load-current-page route)))

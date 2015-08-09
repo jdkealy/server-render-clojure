@@ -1,3 +1,5 @@
 source 'https://rubygems.org'
 gem 'sinatra', :github => "sinatra/sinatra"
 gem 'therubyracer'
+gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
+gem "sinatra-contrib"
