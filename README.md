@@ -1,4 +1,4 @@
-# Server side rendering in clojurescript 
+# Serverside rendering a clojurescript app using Sinatra
 
 ## Install
 
