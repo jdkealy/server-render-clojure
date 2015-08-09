@@ -5,9 +5,11 @@
             [goog.events :as events]
             [ajax.core :refer [POST GET]]
             [bfa-clojure.stores.tokens :as tokens]
+            [bfa-clojure.components.topslider :as topslider]
             [goog.history.EventType :as EventType])
   )
 
 (defn page []
-  [:div [:h2 ""]
+  [:div
+   [topslider/component]
    [:div [:a {:href "#/about"} "go to about page"]]])

@@ -3688,3 +3688,81 @@ article.page {
 #main_container.eventDetail .event-info p {
   margin-top: 50px;
 }
+
+
+
+
+
+
+/* kealy */
+
+.slider-container{
+    width:100%;
+    height:500px;
+    overflow: hidden;
+    position:relative;
+}
+.slider-item{
+    background-size: cover;
+    background-position: center;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+.current-slide{
+    z-index:5555;
+    background-color:white;
+    width:100%;
+}
+.prev-slide{
+    z-index:0;
+}
+.next-slide{
+    z-index:0;
+}
+.slide-controls{
+    z-index:9999;
+}
+.slide-controls .prev{
+    position:absolute;
+    top:200px;
+    left:10px;
+}
+.slide-controls .next{
+    position:absolute;
+    top:200px;
+    right:10px;
+}
+
+.hero-slider .info{
+    color: #fff;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    position: absolute;
+    text-align: center;
+    top: 30%;
+    z-index:5555;
+    width: 60%;
+}
+
+.hero-slider button.active{
+    border: 2px solid #fff;
+}
+.hero-slider button{
+    border-radius: 50%;
+    z-index:5555;
+    border: 1px solid #ccc;
+    background: transparent;
+    display: block;
+    height: 12px;
+    width: 12px;
+    outline: none;
+    padding: 0;
+    line-height: 0;
+    font-size: 0;
+    color: transparent;
+    cursor: pointer;
+}

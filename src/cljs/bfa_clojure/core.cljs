@@ -7,27 +7,10 @@
               [bfa-clojure.config :as config]
               [bfa-clojure.stores.tokens :as tokens]
               [bfa-clojure.pages.home :as home]
+              [bfa-clojure.pages.eventsp :as eventsp]
               [bfa-clojure.pages.about :as about]
               [goog.history.EventType :as EventType])
     (:import goog.History))
-
-;; -------------------------
-;; Views
-
-(defn events []
-  [:div "YO"])
-
-(defn photos []
-  [:div [:h2 "photos"]
-   [:div [:a {:href "#/"} "go to the home page"]]])
-
-(defn photo []
-  [:div [:h2 "photos"]
-   [:div [:a {:href "#/"} "go to the home page"]]])
-
-(defn downloads []
-  [:div [:h2 "downloads"]
-   [:div [:a {:href "#/"} "go to the home page"]]])
 
 (defn current-page []
   [:div [(session/get :current-page)]])
@@ -48,7 +31,6 @@
           [:a {:href "/#book"}
            "book now"]]]]]
       [:article.home.page.transparent-header {:style {:margin-top "100px"}}
-       (str @tokens/token-state)
        [current-page]]]]))
 
 ;; -------------------------
@@ -59,7 +41,7 @@
   (session/put! :current-page #'home/page))
 
 (secretary/defroute "/events" []
-  (session/put! :current-page #'events))
+  (session/put! :current-page #'eventsp/page))
 
 (secretary/defroute "/about" []
   (session/put! :current-page #'about/page))
@@ -83,3 +65,9 @@
 (defn init! []
   (hook-browser-navigation!)
   (mount-root))
+
+(defn ^:export render-me-to-s []
+  ; Render component to markup without reactid
+  (reagent.core/render-to-static-markup [layout])
+  ; Or render component to ready to-go react markup
+  (reagent.core/render-to-string [layout]))
