@@ -23,7 +23,7 @@ class MyApp < Sinatra::Base
     cxt = V8::Context.new
     cxt.load('../lib/setup.js')
     cxt.load('../resources/public/javascripts/server-side.js')
-    str = "bfaclojure.core.render_me_to_s('#{route}')"
+    str = "bfaclojure.core.render_me_to_s('#{route}', #{@preload})"
     @html = cxt.eval(str)
   end
   
@@ -39,8 +39,8 @@ class MyApp < Sinatra::Base
   end
 
   get '/' do
-    load_route("HOME")
     @preload = {items: get_items}.to_json 
+    load_route("HOME")
     erb :index
   end
   # end items
@@ -56,8 +56,8 @@ class MyApp < Sinatra::Base
   end
   
   get '/about' do
-    load_route("ABOUT")
     @preload = {otheritems: get_other_items}.to_json
+    load_route("ABOUT")
     erb :index
   end
   # end other items

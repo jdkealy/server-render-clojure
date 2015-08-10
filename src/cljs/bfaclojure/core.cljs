@@ -53,7 +53,10 @@
 (defn get-current-page [sec-route]
   (if  (.-current_page js/window)
     (let [page (.-current_page js/window)]
-      (session/put! :current-page (load-current-page page))
+      (do
+        (session/put! :current-page (load-current-page page))
+        (set! (.-current_page js/window) nil)
+        )
       )
     (session/put! :current-page (load-current-page sec-route))
     )
@@ -65,8 +68,8 @@
   )
 
 (secretary/defroute "/about" []
-  ;#'about-page
-  (session/put! :current-page (load-current-page "ABOUT")))
+                                        ;#'about-page
+  (get-current-page "ABOUT"))
 
 ;; -------------------------
 ;; History
@@ -98,13 +101,19 @@
     (doall (map (fn [e]
                   (reset! (get string-to-atoms-map e) (clojure.walk/keywordize-keys (get overrides e)))
                   ) (vec (keys overrides))))))
+
+(defn override-atom-states-from-server [items]
+  (let [overrides (js->clj items)]
+    (doall (map (fn [e]
+                  (reset! (get string-to-atoms-map e) (clojure.walk/keywordize-keys (get overrides e)))
+                  ) (vec (keys overrides))))))
 (defn init! []
   (override-atom-states)
   (hook-browser-navigation!)
   (mount-root))
 
 (defn ^:export render-me-to-s [route props]
+  (override-atom-states-from-server props)
   (get-current-page route)
-  (reset! clickcount/click-count 100)
   ; Render component to markup without reactid
   (reagent.core/render-to-string [layout ]))
