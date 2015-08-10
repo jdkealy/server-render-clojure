@@ -15,6 +15,7 @@
                  [ring "1.4.0"]
                  [ring/ring-defaults "0.1.5"]
                  [prone "0.8.2"]
+                 [cljs-ajax "0.3.13"]
                  [compojure "1.4.0"]
                  [hiccup "1.0.5"]
                  [environ "1.0.0"]
@@ -85,7 +86,7 @@
                        :cljsbuild {:jar true
                                    :builds {
                                             :server {:id "server-side"
-                                                     :source-paths ["src"]
+                                                     :source-paths ["src/cljs/bfaclojure"]
                                                      :compiler {:output-to "resources/public/javascripts/server-side.js"
                                                                 :output-dir "resources/public/javascripts/out-server-side"
                                                                 :preamble ["react-with-addons-0.13.3.js"]

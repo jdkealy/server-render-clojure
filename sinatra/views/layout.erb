@@ -5,11 +5,12 @@
     <link href="css/site.css" rel="stylesheet" type="text/css" />
     </head>
   <body>
-    <div id="app">
-      <%= yield %>
-    </div>
+    <div id="app"><%= yield %></div>
     <script type="text/javascript">
-      window.initial_load_from_server = true; // dont fire the secretary event on inital load
+      window.current_page = "<%= @current_page %>"; // dont fire the secretary event on inital load
+    </script>
+    <script type="text/javascript">
+      window.atom_state = <%= @preload %>
     </script>
     <script src="/js/app.js" type="text/javascript"></script>
     </body>
